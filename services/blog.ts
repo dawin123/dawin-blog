@@ -38,6 +38,21 @@ export class BlogApi {
         });
     }
 
+    async fetchBlogBySlug(slug: string): Promise<BlogPost> {
+        return await this.client
+            .getEntries({
+                content_type: 'blogPost',
+                'fields.slug[in]': slug
+            })
+            .then(entries => {
+                if (entries && entries.items && entries.items.length > 0) {
+                    const post = this.convertPost(entries.items[0]);
+                    return post;
+                }
+                return null;
+            });
+    }
+
     convertImage = (rawImage): HeroImage => {
         if (rawImage) {
             return {

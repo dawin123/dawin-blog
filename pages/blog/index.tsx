@@ -46,7 +46,7 @@ const BlogPage: NextPage<BlogPageProps> = ({ entries }) => {
 
     return (
         <div>
-            <h1 style={{ textAlign: 'center' }}>Blog</h1>
+            <h1 className='text-center'>Blog</h1>
             <Container>
                 {rows.length > 0 &&
                     rows.map((row, id) => {
