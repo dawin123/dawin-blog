@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-
+import { Layout } from '../../components/layout/layout';
 interface BlogPageProps {
     entries: Array<BlogPost>;
 }
@@ -45,19 +45,21 @@ const BlogPage: NextPage<BlogPageProps> = ({ entries }) => {
     const rows = chunk(entries.concat(entriesCopy), 3);
 
     return (
-        <div>
-            <h1 className='text-center'>Blog</h1>
-            <Container>
-                {rows.length > 0 &&
-                    rows.map((row, id) => {
-                        return (
-                            <Row key={id} md={3} xs={1}>
-                                {row.length > 0 && renderBlogList(row)}
-                            </Row>
-                        );
-                    })}
-            </Container>
-        </div>
+        <Layout>
+            <div>
+                <h1 className='text-center'>Blog</h1>
+                <Container>
+                    {rows.length > 0 &&
+                        rows.map((row, id) => {
+                            return (
+                                <Row key={id} md={3} xs={1}>
+                                    {row.length > 0 && renderBlogList(row)}
+                                </Row>
+                            );
+                        })}
+                </Container>
+            </div>
+        </Layout>
     );
 };
 
