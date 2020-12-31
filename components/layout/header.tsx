@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 export const Header = () => {
     return (
-        <Navbar bg='light' expand='lg'>
+        <Navbar bg='light' expand='lg' sticky='top'>
             <Navbar.Brand href='#home'>DWS</Navbar.Brand>
             <Navbar.Toggle aria-controls='basic-navbar-nav' />
             <Navbar.Collapse id='basic-navbar-nav'>

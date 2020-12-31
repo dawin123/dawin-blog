@@ -2,12 +2,11 @@ import React from 'react';
 import { NextPage } from 'next';
 import { BlogApi } from '../../services/blog';
 import { BlogPost } from '../../services/blog.types';
-import BlogCard from '../../components/blog-card';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import BlogCard from '../../components/blog/blog-card';
+import { Layout } from '../../components/layout/layout';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { Layout } from '../../components/layout/layout';
 interface BlogPageProps {
     entries: Array<BlogPost>;
 }

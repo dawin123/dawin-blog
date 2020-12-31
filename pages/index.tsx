@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { NextPage } from 'next';
-import { Layout } from '../components/layout/layout';
-import Image from 'react-bootstrap/Image';
+import { PersonalDetailApi } from '../services/personal-detail';
+import { JobExperience, Education } from '../services/personal-detail.types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faLaptop,
@@ -20,12 +20,12 @@ import {
     faJava,
     faAws
 } from '@fortawesome/free-brands-svg-icons';
+import Image from 'react-bootstrap/Image';
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { PersonalDetailApi } from '../services/personal-detail';
-import { JobExperience, Education } from '../services/personal-detail.types';
+import { Layout } from '../components/layout/layout';
 
 interface HomePageProps {
     jobExperiences: Array<JobExperience>;
@@ -35,7 +35,7 @@ interface HomePageProps {
 const Home: NextPage<HomePageProps> = ({ jobExperiences, educations }) => {
     const renderJobExperience = (jobExperience: JobExperience) => {
         return (
-            <Row key={jobExperience.id}>
+            <Row key={jobExperience.id} className='mb-5'>
                 <Col xs={2}>
                     <Image
                         style={{ width: '50px' }}
@@ -43,7 +43,7 @@ const Home: NextPage<HomePageProps> = ({ jobExperiences, educations }) => {
                         alt={jobExperience.icon && jobExperience.icon.title}
                     />
                 </Col>
-                <Col xs={10}>
+                <Col xs={10} className='personal-detail-col'>
                     <h4>{jobExperience.company}</h4>
                     <h6>{`${jobExperience.jobTitle} . ${jobExperience.employmentType}`}</h6>
                     <p>{`${jobExperience.startDate} - ${jobExperience.endDate}`}</p>
@@ -56,7 +56,7 @@ const Home: NextPage<HomePageProps> = ({ jobExperiences, educations }) => {
 
     const renderEducation = (education: Education) => {
         return (
-            <Row key={education.id}>
+            <Row key={education.id} className='mb-5'>
                 <Col xs={2}>
                     <Image
                         style={{ width: '50px' }}
@@ -64,7 +64,7 @@ const Home: NextPage<HomePageProps> = ({ jobExperiences, educations }) => {
                         alt={education.icon && education.icon.title}
                     />
                 </Col>
-                <Col xs={10}>
+                <Col xs={10} className='personal-detail-col'>
                     <h4>{education.schoolName}</h4>
                     <h6>{education.degree}</h6>
                     <p>{`${education.startDate} - ${education.endDate}`}</p>
@@ -398,7 +398,6 @@ Home.getInitialProps = async () => {
     const api = new PersonalDetailApi();
     const jobExperiences = await api.fetchJobExperiences();
     const educations = await api.fetchEducation();
-    console.log(JSON.stringify(educations));
     return { jobExperiences, educations };
 };
 
