@@ -1,5 +1,5 @@
 import React from 'react';
-import { BlogPost } from '../services/blog.types';
+import { BlogPost } from '../../services/blog.types';
 import ReactMarkdown from 'react-markdown';
 import Image from 'react-bootstrap/Image';
 import Container from 'react-bootstrap/Container';
