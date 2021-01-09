@@ -1,7 +1,7 @@
 import { ContentfulClientApi, createClient } from 'contentful';
 import { Author, HeroImage, BlogPost } from './blog.types';
 import moment from 'moment';
-
+import { ENTRY_PER_PAGE } from '../constants';
 export class BlogApi {
     client: ContentfulClientApi;
 
@@ -12,19 +12,26 @@ export class BlogApi {
         });
     }
 
-    async fetchBlogEntries(): Promise<Array<BlogPost>> {
+    async fetchBlogEntries(): Promise<Record<string, any>> {
         return await this.client
             .getEntries({
                 content_type: 'blogPost' // only fetch blog post entry
             })
             .then(entries => {
+                let blogPosts = [];
+                let totalPageNo = 1;
                 if (entries && entries.items && entries.items.length > 0) {
-                    const blogPosts = entries.items.map(entry =>
+                    blogPosts = entries.items.map(entry =>
                         this.convertPost(entry)
                     );
-                    return blogPosts;
                 }
-                return [];
+                if (entries && entries.total) {
+                    totalPageNo = Math.ceil(entries.total / ENTRY_PER_PAGE);
+                }
+                return {
+                    entries: blogPosts,
+                    totalPageNo: totalPageNo
+                };
             });
     }
 
