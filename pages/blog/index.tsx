@@ -1,15 +1,15 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { NextPage } from 'next';
-import { BlogApi } from '../../services/blog';
 import { BlogPost } from '../../services/blog.types';
 import BlogCard from '../../components/blog/blog-card';
 import { Layout } from '../../components/layout/layout';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-interface BlogPageProps {
-    entries: Array<BlogPost>;
-}
+import { getBlogListState } from '../../redux/ducks/blog-list';
+import { fetchBlogList } from '../../redux/thunks/fetch-blog-list';
+import { wrapper } from '../../redux/store';
 
 const chunk = (arr: Array<any>, chunkSize: number) => {
     const R = [];
@@ -18,11 +18,13 @@ const chunk = (arr: Array<any>, chunkSize: number) => {
     return R;
 };
 
-const BlogPage: NextPage<BlogPageProps> = ({ entries }) => {
+const BlogPage: NextPage = ({}) => {
+    const { entries, count } = useSelector(getBlogListState);
+    const dispatch = useDispatch();
     const renderBlogList = entries =>
         entries.map((entry, i) => {
             return (
-                <Col className='mb-4'>
+                <Col className='mb-4' key={`col-${i}`}>
                     <BlogCard
                         key={i}
                         id={entry.id}
@@ -62,10 +64,8 @@ const BlogPage: NextPage<BlogPageProps> = ({ entries }) => {
     );
 };
 
-BlogPage.getInitialProps = async () => {
-    const api = new BlogApi();
-    const entries = await api.fetchBlogEntries();
-    return { entries };
-};
+export const getStaticProps = wrapper.getStaticProps(async ({ store }) => {
+    await store.dispatch(fetchBlogList());
+});
 
 export default BlogPage;

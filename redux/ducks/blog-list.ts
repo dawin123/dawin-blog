@@ -9,14 +9,14 @@ export const blogListActionType = {
 
 interface BlogListAction {
     type: string;
-    blogList?: Array<BlogPost>;
+    entries?: Array<BlogPost>;
     count?: number;
     currentPage?: number;
     totalPage?: number;
 }
 
 export const initialState = {
-    blogList: [],
+    entries: [],
     count: 0,
     currentPage: 1,
     totalPage: 1
@@ -30,7 +30,7 @@ export const blogListReducer = (
         case blogListActionType.SET_BLOG_LIST:
             return {
                 ...state,
-                blogList: action.blogList
+                entries: action.entries
             };
         case blogListActionType.SET_COUNT:
             return {
@@ -51,3 +51,5 @@ export const blogListReducer = (
             return state;
     }
 };
+
+export const getBlogListState = state => state.blogList;
