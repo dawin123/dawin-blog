@@ -1,15 +1,15 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { NextPage } from 'next';
 import { BlogPost } from '../../services/blog.types';
 import BlogCard from '../../components/blog/blog-card';
 import { Layout } from '../../components/layout/layout';
-import { PaginationContainer } from '../../components/pagination/pagination-container';
+import { BlogPagination } from '../../components/blog/blog-pagination';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { getBlogListState } from '../../redux/ducks/blog-list';
-import { fetchBlogList } from '../../redux/thunks/fetch-blog-list';
+import { getBlogListState } from '../../redux/blog-list/reducer';
+import { fetchBlogList } from '../../redux/blog-list/actions';
 import { wrapper } from '../../redux/store';
 
 const chunk = (arr: Array<any>, chunkSize: number) => {
@@ -19,10 +19,9 @@ const chunk = (arr: Array<any>, chunkSize: number) => {
     return R;
 };
 
-const BlogPage: NextPage = ({}) => {
-    const { entries, count } = useSelector(getBlogListState);
-    const dispatch = useDispatch();
-    const renderBlogList = entries =>
+const BlogPage: NextPage = () => {
+    const { entries } = useSelector(getBlogListState);
+    const renderBlogList = (entries: Array<BlogPost>) =>
         entries.map((entry, i) => {
             return (
                 <Col className='mb-4' key={`col-${i}`}>
@@ -59,7 +58,7 @@ const BlogPage: NextPage = ({}) => {
                                 </Row>
                             );
                         })}
-                    <PaginationContainer />
+                    <BlogPagination />
                 </Container>
             </div>
         </Layout>
@@ -67,7 +66,7 @@ const BlogPage: NextPage = ({}) => {
 };
 
 export const getStaticProps = wrapper.getStaticProps(async ({ store }) => {
-    await store.dispatch(fetchBlogList());
+    store.dispatch(fetchBlogList());
 });
 
 export default BlogPage;

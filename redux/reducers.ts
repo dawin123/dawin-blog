@@ -1,5 +1,8 @@
 import { combineReducers } from 'redux';
-import { blogListReducer } from './ducks/blog-list';
+import { blogListReducer, BlogListState } from './blog-list/reducer';
+export interface GlobalState {
+    blogList: BlogListState;
+}
 
 export const reducers = combineReducers({
     blogList: blogListReducer
