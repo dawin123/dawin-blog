@@ -17,6 +17,9 @@ const reducer = (state, action) => {
             ...state, // use previous state
             ...action.payload // apply delta from hydration
         };
+        console.log('action.payload: ' + JSON.stringify(action.payload));
+        console.log('state: ' + JSON.stringify(state));
+        console.log(JSON.stringify(nextState));
         return nextState;
     } else {
         return reducers(state, action);

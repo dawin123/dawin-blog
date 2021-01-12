@@ -5,6 +5,7 @@ import { BlogPost } from '../../services/blog.types';
 import BlogCard from '../../components/blog/blog-card';
 import { Layout } from '../../components/layout/layout';
 import { BlogPagination } from '../../components/blog/blog-pagination';
+import { BlogFilter } from '../../components/blog/blog-filter';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -41,6 +42,7 @@ const BlogPage: NextPage = () => {
                 </Col>
             );
         });
+    console.log(JSON.stringify(entries));
 
     const entriesCopy = JSON.parse(JSON.stringify(entries));
     const rows = chunk(entries.concat(entriesCopy), 3);
@@ -50,6 +52,7 @@ const BlogPage: NextPage = () => {
             <div>
                 <h1 className='text-center'>Blog</h1>
                 <Container>
+                    <BlogFilter />
                     {rows.length > 0 &&
                         rows.map((row, id) => {
                             return (
