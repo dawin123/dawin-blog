@@ -17,10 +17,26 @@ export const setCurrentPage = (currentPage: number) => ({
     currentPage: currentPage
 });
 
+export const addSelectedTag = (tag: string) => ({
+    type: blogListActionType.ADD_SELECTED_TAG,
+    tag: tag
+});
+
+export const removeSelectedTag = (index: number) => ({
+    type: blogListActionType.REMOVE_SELECTED_TAG,
+    index: index
+});
+
+export const clearSelectedTag = () => ({
+    type: blogListActionType.CLEAR_SELECTED_TAG
+});
+
 export const fetchBlogList = () => {
     return (dispatch, getState) => {
         const api = new BlogApi();
-        return api.fetchBlogEntries().then(result => {
+        const state = getState();
+        const { selectedTags } = state.blogList;
+        return api.fetchBlogEntries(selectedTags).then(result => {
             dispatch(setBlogList(result.entries));
             dispatch(setTotalPage(result.totalPageNo));
         });

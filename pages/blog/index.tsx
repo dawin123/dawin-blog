@@ -5,6 +5,7 @@ import { BlogPost } from '../../services/blog.types';
 import BlogCard from '../../components/blog/blog-card';
 import { Layout } from '../../components/layout/layout';
 import { BlogPagination } from '../../components/blog/blog-pagination';
+import { BlogFilter } from '../../components/blog/blog-filter';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -50,6 +51,7 @@ const BlogPage: NextPage = () => {
             <div>
                 <h1 className='text-center'>Blog</h1>
                 <Container>
+                    <BlogFilter />
                     {rows.length > 0 &&
                         rows.map((row, id) => {
                             return (
@@ -66,7 +68,7 @@ const BlogPage: NextPage = () => {
 };
 
 export const getStaticProps = wrapper.getStaticProps(async ({ store }) => {
-    store.dispatch(fetchBlogList());
+    await store.dispatch(fetchBlogList());
 });
 
 export default BlogPage;
