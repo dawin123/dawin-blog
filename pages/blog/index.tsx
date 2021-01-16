@@ -42,7 +42,6 @@ const BlogPage: NextPage = () => {
                 </Col>
             );
         });
-    console.log(JSON.stringify(entries));
 
     const entriesCopy = JSON.parse(JSON.stringify(entries));
     const rows = chunk(entries.concat(entriesCopy), 3);
@@ -69,7 +68,7 @@ const BlogPage: NextPage = () => {
 };
 
 export const getStaticProps = wrapper.getStaticProps(async ({ store }) => {
-    store.dispatch(fetchBlogList());
+    await store.dispatch(fetchBlogList());
 });
 
 export default BlogPage;

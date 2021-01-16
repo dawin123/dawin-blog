@@ -34,7 +34,9 @@ export const clearSelectedTag = () => ({
 export const fetchBlogList = () => {
     return (dispatch, getState) => {
         const api = new BlogApi();
-        return api.fetchBlogEntries().then(result => {
+        const state = getState();
+        const { selectedTags } = state.blogList;
+        return api.fetchBlogEntries(selectedTags).then(result => {
             dispatch(setBlogList(result.entries));
             dispatch(setTotalPage(result.totalPageNo));
         });

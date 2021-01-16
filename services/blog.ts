@@ -12,27 +12,34 @@ export class BlogApi {
         });
     }
 
-    async fetchBlogEntries(): Promise<Record<string, any>> {
-        return await this.client
-            .getEntries({
-                content_type: 'blogPost' // only fetch blog post entry
-            })
-            .then(entries => {
-                let blogPosts = [];
-                let totalPageNo = 1;
-                if (entries && entries.items && entries.items.length > 0) {
-                    blogPosts = entries.items.map(entry =>
-                        this.convertPost(entry)
-                    );
-                }
-                if (entries && entries.total) {
-                    totalPageNo = Math.ceil(entries.total / ENTRY_PER_PAGE);
-                }
-                return {
-                    entries: blogPosts,
-                    totalPageNo: totalPageNo
-                };
-            });
+    async fetchBlogEntries(
+        selectedTags: Array<string>
+    ): Promise<Record<string, any>> {
+        let request: Record<string, string> = {
+            content_type: 'blogPost' // only fetch blog post entry
+        };
+
+        if (selectedTags.length > 0) {
+            request = {
+                ...request,
+                'fields.tags[in]': selectedTags.toString()
+            };
+        }
+
+        return await this.client.getEntries(request).then(entries => {
+            let blogPosts = [];
+            let totalPageNo = 1;
+            if (entries && entries.items && entries.items.length > 0) {
+                blogPosts = entries.items.map(entry => this.convertPost(entry));
+            }
+            if (entries && entries.total) {
+                totalPageNo = Math.ceil(entries.total / ENTRY_PER_PAGE);
+            }
+            return {
+                entries: blogPosts,
+                totalPageNo: totalPageNo
+            };
+        });
     }
 
     async fetchBlogById(id): Promise<BlogPost> {
