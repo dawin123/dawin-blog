@@ -13,10 +13,13 @@ export class BlogApi {
     }
 
     async fetchBlogEntries(
-        selectedTags: Array<string>
+        selectedTags: Array<string>,
+        currentPage: number
     ): Promise<Record<string, any>> {
-        let request: Record<string, string> = {
-            content_type: 'blogPost' // only fetch blog post entry
+        let request: Record<string, any> = {
+            content_type: 'blogPost', // only fetch blog post entry
+            limit: ENTRY_PER_PAGE,
+            skip: currentPage - 1
         };
 
         if (selectedTags.length > 0) {

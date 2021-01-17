@@ -6,7 +6,8 @@ import {
     addSelectedTag,
     removeSelectedTag,
     clearSelectedTag,
-    fetchBlogList
+    fetchBlogList,
+    setCurrentPage
 } from '../../redux/blog-list/actions';
 import { getBlogListState } from '../../redux/blog-list/reducer';
 
@@ -29,11 +30,13 @@ export const BlogFilter: React.FC = () => {
         } else {
             dispatch(addSelectedTag(tag));
         }
+        dispatch(setCurrentPage(1));
         dispatch(fetchBlogList());
     };
 
     const handleClearFilter = () => {
         dispatch(clearSelectedTag());
+        dispatch(setCurrentPage(1));
         dispatch(fetchBlogList());
     };
 
