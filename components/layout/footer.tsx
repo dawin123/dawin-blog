@@ -7,7 +7,8 @@ import {
     faFacebookSquare,
     faLinkedin,
     faBehanceSquare,
-    faInstagramSquare
+    faInstagramSquare,
+    faYoutubeSquare
 } from '@fortawesome/free-brands-svg-icons';
 
 export const Footer = () => {
@@ -15,7 +16,7 @@ export const Footer = () => {
         <div className='bg-secondary text-white p-4'>
             <Container>
                 <Row>
-                    <Col>Brand name</Col>
+                    <Col>DWS</Col>
                     <Col>
                         <h6>Social Media and Links</h6>
                         <a
@@ -54,6 +55,16 @@ export const Footer = () => {
                         >
                             <FontAwesomeIcon
                                 icon={faInstagramSquare}
+                                width={24}
+                                className='mr-2'
+                            />
+                        </a>
+                        <a
+                            href='https://www.youtube.com/channel/UCuFnNlvYZA1i9WI-LQ_wpjA'
+                            className='text-white'
+                        >
+                            <FontAwesomeIcon
+                                icon={faYoutubeSquare}
                                 width={24}
                                 className='mr-2'
                             />

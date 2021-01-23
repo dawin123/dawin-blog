@@ -2,12 +2,24 @@ $space-0: 0;
 $space-10: 10px;
 $space-20: 20px;
 
-.personal-detail-col {
-    p {
-        margin-bottom: $space-0;
-    }
+/* Global */
+html,
+body {
+    padding: 0;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+        Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
+* {
+    box-sizing: border-box;
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+/* Blog List */
 .pagination-container {
     display: flex;
     justify-content: center;
@@ -22,5 +34,31 @@ $space-20: 20px;
     .filter-button {
         margin-left: $space-10;
         margin-right: $space-10;
+    }
+}
+
+/* Landing Page */
+main {
+    padding: 1rem $space-0;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+a {
+    text-decoration: none;
+}
+
+.title {
+    margin: $space-0;
+    line-height: 1.15;
+    font-size: 4rem;
+}
+
+.personal-detail-col {
+    p {
+        margin-bottom: $space-0;
     }
 }

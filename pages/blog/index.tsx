@@ -43,8 +43,7 @@ const BlogPage: NextPage = () => {
             );
         });
 
-    const entriesCopy = JSON.parse(JSON.stringify(entries));
-    const rows = chunk(entries.concat(entriesCopy), 3);
+    const rows = chunk(entries, 3);
 
     return (
         <Layout>
