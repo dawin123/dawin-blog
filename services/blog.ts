@@ -74,7 +74,7 @@ export class BlogApi {
         if (rawImage) {
             return {
                 imageUrl: rawImage.file.url.replace('//', 'http://'), // may need to put null check as well here
-                description: rawImage.description,
+                description: rawImage.description || null,
                 title: rawImage.title
             };
         }

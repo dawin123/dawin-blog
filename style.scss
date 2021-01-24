@@ -37,6 +37,38 @@ body {
     }
 }
 
+.blog-card {
+    cursor: pointer;
+    &:hover {
+        opacity: 0.8;
+    }
+
+    .pill {
+        background-color: white;
+        color: #007bff;
+        border: 1px solid #007bff;
+    }
+}
+
+/* Blog Detail */
+.hero-image-container {
+    display: flex;
+    justify-content: center;
+
+    .hero-image {
+        margin-bottom: '-200px';
+    }
+}
+
+.body-container {
+    position: relative;
+    text-align: justify;
+
+    img {
+        width: 100%;
+    }
+}
+
 /* Landing Page */
 main {
     padding: 1rem $space-0;

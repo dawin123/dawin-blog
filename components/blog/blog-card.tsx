@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
+import Badge from 'react-bootstrap/Badge';
 import Link from 'next/link';
 interface Props {
     id: string;
@@ -24,7 +25,7 @@ const BlogCard: React.FC<Props> = ({
 }) => {
     return (
         <Link href='/blog/[slug]' as={`/blog/${slug}`} passHref>
-            <Card data-testid={`blog-card-${id}`}>
+            <Card data-testid={`blog-card-${id}`} className='blog-card'>
                 <Card.Img variant='top' src={imageUrl ? imageUrl : ''} />
                 <Card.Body>
                     <Card.Title>{title}</Card.Title>
@@ -32,6 +33,18 @@ const BlogCard: React.FC<Props> = ({
                         <p>{publishedDate}</p>
                     </Card.Subtitle>
                     <Card.Text>{description}</Card.Text>
+                    {tags.map(tag => {
+                        return (
+                            <Badge
+                                pill
+                                variant='light'
+                                key={tag}
+                                className='pill'
+                            >
+                                {tag}
+                            </Badge>
+                        );
+                    })}
                 </Card.Body>
             </Card>
         </Link>
