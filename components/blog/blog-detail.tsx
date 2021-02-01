@@ -26,7 +26,7 @@ export const BlogDetail = (props: BlogDetailProps) => {
                 />
             </div>
             <Container className='body-container'>
-                <section className='p-5 bg-white'>
+                <section className='p-4 bg-white'>
                     <ReactMarkdown source={post.body} />
                 </section>
             </Container>

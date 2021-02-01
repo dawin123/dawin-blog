@@ -2,6 +2,27 @@ $space-0: 0;
 $space-10: 10px;
 $space-20: 20px;
 
+$tablet-width: 768px;
+$desktop-width: 1024px;
+
+@mixin mobile {
+    @media (max-width: #{$tablet-width - 1px}) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media (min-width: #{$tablet-width}) and (max-width: #{$desktop-width - 1px}) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media (min-width: #{$desktop-width}) {
+        @content;
+    }
+}
+
 /* Global */
 html,
 body {
@@ -63,9 +84,16 @@ body {
 .body-container {
     position: relative;
     text-align: justify;
+    overflow-wrap: anywhere;
 
     img {
-        width: 100%;
+        max-width: 960px;
+        @include tablet {
+            max-width: 640px;
+        }
+        @include mobile {
+            max-width: 100%;
+        }
     }
 }
 

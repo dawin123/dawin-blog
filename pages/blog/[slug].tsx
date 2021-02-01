@@ -4,8 +4,6 @@ import { BlogPost } from '../../services/blog.types';
 import { BlogApi } from '../../services/blog';
 import { BlogDetail } from '../../components/blog/blog-detail';
 import { Layout } from '../../components/layout/layout';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 // import { NextSeo } from "next-seo";
 
 type BlogDetailPageProps = {
@@ -15,12 +13,8 @@ type BlogDetailPageProps = {
 const BlogDetailPage: NextPage<BlogDetailPageProps> = ({ post }) => {
     return (
         <Layout>
-            <Row>
-                <Col>
-                    {!post && <div>Loading...</div>}
-                    {post && <BlogDetail post={post} />}
-                </Col>
-            </Row>
+            {!post && <div>Loading...</div>}
+            {post && <BlogDetail post={post} />}
         </Layout>
     );
 };
