@@ -1,14 +1,14 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { NextPage } from 'next';
+import type { NextPage } from 'next';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import { BlogPost } from '../../services/blog.types';
 import BlogCard from '../../components/blog/blog-card';
 import { Layout } from '../../components/layout/layout';
 import { BlogPagination } from '../../components/blog/blog-pagination';
 import { BlogFilter } from '../../components/blog/blog-filter';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import { getBlogListState } from '../../redux/blog-list/reducer';
 import { fetchBlogList } from '../../redux/blog-list/actions';
 import { wrapper } from '../../redux/store';
@@ -46,22 +46,20 @@ const BlogPage: NextPage = () => {
     const rows = chunk(entries, 3);
 
     return (
-        <Layout>
-            <div>
+        <Layout>    
+            <Container>
                 <h1 className='text-center'>Blog</h1>
-                <Container>
-                    <BlogFilter />
-                    {rows.length > 0 &&
-                        rows.map((row, id) => {
-                            return (
-                                <Row key={id} md={3} xs={1}>
-                                    {row.length > 0 && renderBlogList(row)}
-                                </Row>
-                            );
-                        })}
-                    <BlogPagination />
-                </Container>
-            </div>
+                <BlogFilter />
+                {rows.length > 0 &&
+                    rows.map((row, id) => {
+                        return (
+                            <Row key={id} md={3} xs={1}>
+                                {row.length > 0 && renderBlogList(row)}
+                            </Row>
+                        );
+                    })}
+                <BlogPagination />
+            </Container>
         </Layout>
     );
 };

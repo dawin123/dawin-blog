@@ -1,5 +1,5 @@
 import React from 'react';
-import { NextPage } from 'next';
+import type { NextPage } from 'next';
 import { BlogPost } from '../../services/blog.types';
 import { BlogApi } from '../../services/blog';
 import { BlogDetail } from '../../components/blog/blog-detail';
