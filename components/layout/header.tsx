@@ -16,6 +16,9 @@ export const Header = () => {
                     <Link href='/blog' as={'/blog'} passHref>
                         <Nav.Link href='/blog'>Blog</Nav.Link>
                     </Link>
+                    <Link href='/project-svarga' as={'/project-svarga'} passHref>
+                        <Nav.Link href='/project-svarga'>Project Svarga</Nav.Link>
+                    </Link>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>
