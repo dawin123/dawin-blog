@@ -7,7 +7,7 @@ export const Layout = props => {
     return (
         <>
             <Head>
-                <title>Dawin's Space</title>
+                <title>Dawin&apos;s Space</title>
                 <link rel='icon' href='/favicon.ico' />
             </Head>
             <Header />
