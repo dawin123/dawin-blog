@@ -1,5 +1,6 @@
-import { ContentfulClientApi, createClient } from 'contentful';
-import {
+import { createClient } from 'contentful';
+import type { ContentfulClientApi } from 'contentful';
+import type {
     JobExperience,
     PersonalDetailIcon,
     Education
@@ -7,7 +8,7 @@ import {
 import moment from 'moment';
 
 export class PersonalDetailApi {
-    client: ContentfulClientApi;
+    client: ContentfulClientApi<undefined>;
 
     constructor() {
         this.client = createClient({
@@ -20,7 +21,7 @@ export class PersonalDetailApi {
         return await this.client
             .getEntries({
                 content_type: 'jobExperience',
-                order: '-fields.startDate'
+                order: ['-fields.startDate']
             })
             .then(entries => {
                 if (entries && entries.items && entries.items.length > 0) {
@@ -37,7 +38,7 @@ export class PersonalDetailApi {
         return await this.client
             .getEntries({
                 content_type: 'education',
-                order: '-fields.startDate'
+                order: ['-fields.startDate']
             })
             .then(entries => {
                 if (entries && entries.items && entries.items.length > 0) {

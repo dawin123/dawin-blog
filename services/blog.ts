@@ -1,9 +1,10 @@
-import { ContentfulClientApi, createClient } from 'contentful';
-import { Author, HeroImage, BlogPost } from './blog.types';
+import { createClient } from 'contentful';
+import type { ContentfulClientApi } from 'contentful';
+import type { Author, HeroImage, BlogPost } from './blog.types';
 import moment from 'moment';
 import { ENTRY_PER_PAGE } from '../constants';
 export class BlogApi {
-    client: ContentfulClientApi;
+    client: ContentfulClientApi<undefined>;
 
     constructor() {
         this.client = createClient({
