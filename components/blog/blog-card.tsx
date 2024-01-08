@@ -2,6 +2,9 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Badge from 'react-bootstrap/Badge';
 import Link from 'next/link';
+import { getBlogListState } from '../../redux/blog-list/reducer';
+import { useSelector } from 'react-redux';
+
 interface Props {
     id: string;
     description: string;
@@ -23,6 +26,8 @@ const BlogCard: React.FC<Props> = ({
     imageUrl,
     author
 }) => {
+    const { tagList } = useSelector(getBlogListState);
+
     return (
         <Link href='/blog/[slug]' as={`/blog/${slug}`} passHref>
             <Card data-testid={`blog-card-${id}`} className='blog-card'>
@@ -41,7 +46,7 @@ const BlogCard: React.FC<Props> = ({
                                 key={tag}
                                 className='pill'
                             >
-                                {tag}
+                                {tagList[tag]}
                             </Badge>
                         );
                     })}

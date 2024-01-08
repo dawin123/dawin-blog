@@ -26,7 +26,7 @@ export class BlogApi {
         if (selectedTags.length > 0) {
             request = {
                 ...request,
-                'fields.tags[in]': selectedTags.toString()
+                'metadata.tags.sys.id[in]': selectedTags.toString()
             };
         }
 
@@ -111,7 +111,7 @@ export class BlogApi {
             description: rawPost.description,
             publishedDate: moment(rawPost.publishedDate).format('DD MMM YYYY'),
             slug: rawPost.slug,
-            tags: rawPost.tags,
+            tags: rawData.metadata.tags.map(tag => tag.sys.id),
             title: rawPost.title,
             heroImage: this.convertImage(rawHeroImage),
             author: this.convertAuthor(rawAuthor)

@@ -1,6 +1,8 @@
 import { BlogApi } from '../../services/blog';
+import { TagsApi } from '../../services/tags';
 import { BlogPost } from '../../services/blog.types';
 import { blogListActionType } from './reducer';
+import type { Tags } from '../../services/tags.types';
 
 export const setBlogList = (entries: Array<BlogPost>) => ({
     type: blogListActionType.SET_BLOG_LIST,
@@ -31,6 +33,11 @@ export const clearSelectedTag = () => ({
     type: blogListActionType.CLEAR_SELECTED_TAG
 });
 
+export const setTagList = (tagList: Tags) => ({
+    type: blogListActionType.SET_TAG_LIST,
+    tagList
+});
+
 export const fetchBlogList = () => {
     return (dispatch, getState) => {
         const api = new BlogApi();
@@ -39,6 +46,15 @@ export const fetchBlogList = () => {
         return api.fetchBlogEntries(selectedTags, currentPage).then(result => {
             dispatch(setBlogList(result.entries));
             dispatch(setTotalPage(result.totalPageNo));
+        });
+    };
+};
+
+export const fetchBlogTags = () => {
+    return dispatch => {
+        const api = new TagsApi();
+        return api.fetchTags().then(tags => {
+            dispatch(setTagList(tags));
         });
     };
 };
