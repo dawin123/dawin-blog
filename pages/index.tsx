@@ -88,8 +88,11 @@ const Home: NextPage<HomePageProps> = ({ jobExperiences, educations }) => {
                     />
                     <h1 className='title'>
                         Welcome to{' '}
-                        <span style={{ color: '#0070f3' }}>Dawin&apos;s Space</span>
+                        <span style={{ color: '#0070f3' }}>
+                            Dawin&apos;s Space
+                        </span>
                     </h1>
+                    <h2>Dawin Widjaja</h2>
                     <p className='text-center' style={{ fontSize: '1.5rem' }}>
                         Software Engineer, Mostly Frontend
                     </p>
