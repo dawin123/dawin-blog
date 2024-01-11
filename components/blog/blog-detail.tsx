@@ -1,8 +1,10 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { BlogPost } from '../../services/blog.types';
 import ReactMarkdown from 'react-markdown';
 import Image from 'react-bootstrap/Image';
 import Container from 'react-bootstrap/Container';
+import { getBlogListState } from '../../redux/blog-list/reducer';
 
 type BlogDetailProps = {
     post: BlogPost;
@@ -10,7 +12,9 @@ type BlogDetailProps = {
 
 export const BlogDetail = (props: BlogDetailProps) => {
     const { post } = props;
-    const mainTag = post.tags.length > 0 ? post.tags[0] : '';
+    const { tagList } = useSelector(getBlogListState);
+    const mainTag = post.tags.length > 0 ? tagList[post.tags[0]] : '';
+
     return (
         <div>
             <Container>

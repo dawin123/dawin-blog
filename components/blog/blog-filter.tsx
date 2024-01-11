@@ -13,7 +13,7 @@ import { getBlogListState } from '../../redux/blog-list/reducer';
 
 export const BlogFilter: React.FC = () => {
     const dispatch = useDispatch();
-    const { selectedTags } = useSelector(getBlogListState);
+    const { selectedTags, tagList } = useSelector(getBlogListState);
 
     const isTagSelected = (tag: string) => {
         const tagIndex = selectedTags.indexOf(tag);
@@ -42,19 +42,17 @@ export const BlogFilter: React.FC = () => {
 
     return (
         <div className='blog-filter'>
-            {Object.keys(BLOG_TAGS).map(key => {
+            {Object.keys(tagList).map(tag => {
                 return (
                     <Button
                         variant={
-                            isTagSelected(BLOG_TAGS[key])
-                                ? 'primary'
-                                : 'outline-primary'
+                            isTagSelected(tag) ? 'primary' : 'outline-primary'
                         }
-                        key={key}
+                        key={tag}
                         className='filter-button'
-                        onClick={handleFilterToggle(BLOG_TAGS[key])}
+                        onClick={handleFilterToggle(tag)}
                     >
-                        {BLOG_TAGS[key]}
+                        {tagList[tag]}
                     </Button>
                 );
             })}

@@ -1,5 +1,6 @@
 import { BlogPost } from '../../services/blog.types';
 import { GlobalState } from '../reducers';
+import type { Tags } from '../../services/tags.types';
 
 export const blogListActionType = {
     SET_BLOG_LIST: 'SET_BLOG_LIST',
@@ -7,7 +8,8 @@ export const blogListActionType = {
     SET_TOTAL_PAGE: 'SET_TOTAL_PAGE',
     ADD_SELECTED_TAG: 'ADD_SELECTED_TAG',
     REMOVE_SELECTED_TAG: 'REMOVE_SELECTED_TAG',
-    CLEAR_SELECTED_TAG: 'CLEAR_SELECTED_TAG'
+    CLEAR_SELECTED_TAG: 'CLEAR_SELECTED_TAG',
+    SET_TAG_LIST: 'SET_TAG_LIST'
 };
 
 interface BlogListAction {
@@ -17,6 +19,7 @@ interface BlogListAction {
     totalPage?: number;
     tag?: string;
     index?: number;
+    tagList: Tags;
 }
 
 export interface BlogListState {
@@ -24,13 +27,15 @@ export interface BlogListState {
     currentPage: number;
     totalPage: number;
     selectedTags: [];
+    tagList: Tags;
 }
 
 export const initialState: BlogListState = {
     entries: [],
     currentPage: 1,
     totalPage: 1,
-    selectedTags: []
+    selectedTags: [],
+    tagList: {}
 };
 
 export const blogListReducer = (
@@ -71,9 +76,15 @@ export const blogListReducer = (
                 ...state,
                 selectedTags: []
             };
+        case blogListActionType.SET_TAG_LIST:
+            return {
+                ...state,
+                tagList: action.tagList
+            };
         default:
             return state;
     }
 };
 
-export const getBlogListState = (state: GlobalState) => state.blogList;
+export const getBlogListState = (state: GlobalState): BlogListState =>
+    state.blogList;

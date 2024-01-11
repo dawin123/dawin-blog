@@ -10,7 +10,7 @@ import { Layout } from '../../components/layout/layout';
 import { BlogPagination } from '../../components/blog/blog-pagination';
 import { BlogFilter } from '../../components/blog/blog-filter';
 import { getBlogListState } from '../../redux/blog-list/reducer';
-import { fetchBlogList } from '../../redux/blog-list/actions';
+import { fetchBlogList, fetchBlogTags } from '../../redux/blog-list/actions';
 import { wrapper } from '../../redux/store';
 
 const chunk = (arr: Array<any>, chunkSize: number) => {
@@ -46,7 +46,7 @@ const BlogPage: NextPage = () => {
     const rows = chunk(entries, 3);
 
     return (
-        <Layout>    
+        <Layout>
             <Container>
                 <h1 className='text-center'>Blog</h1>
                 <BlogFilter />
@@ -66,6 +66,7 @@ const BlogPage: NextPage = () => {
 
 export const getStaticProps = wrapper.getStaticProps(async ({ store }) => {
     await store.dispatch(fetchBlogList());
+    await store.dispatch(fetchBlogTags());
 });
 
 export default BlogPage;
