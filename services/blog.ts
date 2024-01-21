@@ -109,7 +109,7 @@ export class BlogApi {
             id: rawData.sys.id,
             body: rawPost.body,
             description: rawPost.description,
-            publishedDate: moment(rawPost.publishedDate).format('DD MMM YYYY'),
+            publishedDate: moment(rawPost.publishDate).format('DD MMM YYYY'),
             slug: rawPost.slug,
             tags: rawData.metadata.tags.map(tag => tag.sys.id),
             title: rawPost.title,
