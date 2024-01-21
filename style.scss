@@ -63,7 +63,6 @@ body {
     color: #212529;
     &:hover {
         opacity: 0.8;
-        text-decoration: none;
     }
 
     .pill {
@@ -111,6 +110,9 @@ main {
 
 a {
     text-decoration: none;
+    &:hover {
+        text-decoration: none;
+    }
 }
 
 .title {
