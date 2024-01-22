@@ -60,6 +60,7 @@ body {
 
 .blog-card {
     cursor: pointer;
+    color: #212529;
     &:hover {
         opacity: 0.8;
     }
@@ -109,6 +110,9 @@ main {
 
 a {
     text-decoration: none;
+    &:hover {
+        text-decoration: none;
+    }
 }
 
 .title {

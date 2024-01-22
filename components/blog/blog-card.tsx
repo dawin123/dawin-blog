@@ -29,7 +29,7 @@ const BlogCard: React.FC<Props> = ({
     const { tagList } = useSelector(getBlogListState);
 
     return (
-        <Link href='/blog/[slug]' as={`/blog/${slug}`} passHref>
+        <Link href='/blog/[slug]' as={`/blog/${slug}`}>
             <Card data-testid={`blog-card-${id}`} className='blog-card'>
                 <Card.Img variant='top' src={imageUrl ? imageUrl : ''} />
                 <Card.Body>
