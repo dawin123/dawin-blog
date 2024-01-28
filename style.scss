@@ -40,6 +40,13 @@ body {
     text-align: justify;
 }
 
+/* Navbar */
+.navbar-link {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    color: rgba(0, 0, 0, 0.5);
+}
+
 /* Blog List */
 .pagination-container {
     display: flex;
