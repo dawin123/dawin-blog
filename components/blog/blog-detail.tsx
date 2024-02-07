@@ -1,10 +1,10 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { BlogPost } from '../../services/blog.types';
-import ReactMarkdown from 'react-markdown';
 import Image from 'react-bootstrap/Image';
 import Container from 'react-bootstrap/Container';
 import { getBlogListState } from '../../redux/blog-list/reducer';
+import Markdown from 'react-markdown';
 
 type BlogDetailProps = {
     post: BlogPost;
@@ -31,7 +31,7 @@ export const BlogDetail = (props: BlogDetailProps) => {
             </div>
             <Container className='body-container'>
                 <section className='p-4 bg-white'>
-                    <ReactMarkdown source={post.body} />
+                    <Markdown>{post.body}</Markdown>
                 </section>
             </Container>
         </div>
