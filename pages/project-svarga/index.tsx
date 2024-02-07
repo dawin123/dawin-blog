@@ -12,7 +12,10 @@ const pages = [
     'project-svarga/Comic_P_001_007-min.webp',
     'project-svarga/Comic_P_001_008-min.webp',
     'project-svarga/Comic_P_001_009-min.webp',
-    'project-svarga/Comic_P_001_010-min.webp'
+    'project-svarga/Comic_P_001_010-min.webp',
+    'project-svarga/Comic_P_001_011-min.webp',
+    'project-svarga/Comic_P_001_012-min.webp',
+    'project-svarga/Comic_P_001_013-min.webp'
 ];
 
 const SvargaPage: NextPage = () => {
