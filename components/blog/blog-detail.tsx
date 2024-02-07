@@ -24,8 +24,8 @@ export const BlogDetail = (props: BlogDetailProps) => {
             <div className='hero-image-container'>
                 <Image
                     className='hero-image'
-                    src={post.heroImage.imageUrl}
-                    alt={post.heroImage.title}
+                    src={post.heroImage?.imageUrl}
+                    alt={post.heroImage?.title}
                     fluid
                 />
             </div>

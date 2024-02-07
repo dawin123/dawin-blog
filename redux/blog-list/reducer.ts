@@ -68,7 +68,7 @@ export const blogListReducer = (
                 ...state,
                 selectedTags: [
                     ...state.selectedTags.slice(0, action.index),
-                    ...state.selectedTags.slice(action.index + 1)
+                    ...state.selectedTags.slice((action?.index || 0) + 1)
                 ]
             };
         case blogListActionType.CLEAR_SELECTED_TAG:

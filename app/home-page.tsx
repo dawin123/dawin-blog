@@ -47,11 +47,9 @@ const HomePage = ({ jobExperiences, educations }: HomePageProps) => {
                     <h6>{`${jobExperience.jobTitle} . ${jobExperience.employmentType}`}</h6>
                     <p>{`${jobExperience.startDate} - ${jobExperience.endDate}`}</p>
                     <p>{jobExperience.location}</p>
-                    {/* {typeof window !== 'undefined' && ( */}
                     <div className='text-justify'>
                         <Markdown>{jobExperience.description}</Markdown>
                     </div>
-                    {/* )} */}
                 </Col>
             </Row>
         );
@@ -70,8 +68,8 @@ const HomePage = ({ jobExperiences, educations }: HomePageProps) => {
                 <Col xs={10} className='personal-detail-col'>
                     <h4>{education.schoolName}</h4>
                     <h6>{education.degree}</h6>
-                    {/* <p>{`${education.startDate} - ${education.endDate}`}</p> */}
-                    {/* <p>{education.location}</p> */}
+                    <p>{`${education.startDate} - ${education.endDate}`}</p>
+                    <p>{education.location}</p>
                 </Col>
             </Row>
         );
@@ -182,7 +180,7 @@ const HomePage = ({ jobExperiences, educations }: HomePageProps) => {
                     <h2 className='text-center'>Education</h2>
                     <Container>
                         {educations.map(education => {
-                            // return renderEducation(education);
+                            return renderEducation(education);
                         })}
                     </Container>
                 </div>
