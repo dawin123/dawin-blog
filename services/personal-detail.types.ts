@@ -5,7 +5,7 @@ export type PersonalDetailIcon = {
 
 export type JobExperience = {
     id: string;
-    icon: PersonalDetailIcon;
+    icon?: PersonalDetailIcon;
     jobTitle: string;
     company: string;
     employmentType: string;
@@ -17,7 +17,7 @@ export type JobExperience = {
 
 export type Education = {
     id: string;
-    icon: PersonalDetailIcon;
+    icon?: PersonalDetailIcon;
     schoolName: string;
     location: string;
     degree: string;

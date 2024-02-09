@@ -12,8 +12,8 @@ export class PersonalDetailApi {
 
     constructor() {
         this.client = createClient({
-            space: process.env.CONTENTFUL_SPACE_ID,
-            accessToken: process.env.CONTENTFUL_ACCESS_TOKEN
+            space: process.env.CONTENTFUL_SPACE_ID ?? '',
+            accessToken: process.env.CONTENTFUL_ACCESS_TOKEN ?? ''
         });
     }
 
@@ -51,14 +51,14 @@ export class PersonalDetailApi {
             });
     }
 
-    convertImage = (rawImage): PersonalDetailIcon => {
+    convertImage = (rawImage): PersonalDetailIcon | undefined => {
         if (rawImage) {
             return {
                 imageUrl: rawImage.file.url.replace('//', 'http://'), // may need to put null check as well here
                 title: rawImage.title
             };
         }
-        return null;
+        return undefined;
     };
 
     convertJob = (rawData): JobExperience => {
