@@ -40,12 +40,7 @@ const BlogCard: React.FC<Props> = ({
                     <Card.Text>{description}</Card.Text>
                     {tags.map(tag => {
                         return (
-                            <Badge
-                                pill
-                                key={tag}
-                                className='pill'
-                                variant='light'
-                            >
+                            <Badge pill key={tag} className='pill' bg='light'>
                                 {tagList[tag]}
                             </Badge>
                         );
