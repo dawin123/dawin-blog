@@ -3,13 +3,14 @@ import type { ContentfulClientApi } from 'contentful';
 import type { Author, HeroImage, BlogPost } from './blog.types';
 import moment from 'moment';
 import { ENTRY_PER_PAGE } from '../constants';
+
 export class BlogApi {
     client: ContentfulClientApi<undefined>;
 
     constructor() {
         this.client = createClient({
-            space: process.env.CONTENTFUL_SPACE_ID,
-            accessToken: process.env.CONTENTFUL_ACCESS_TOKEN
+            space: process.env.CONTENTFUL_SPACE_ID ?? '',
+            accessToken: process.env.CONTENTFUL_ACCESS_TOKEN ?? ''
         });
     }
 
@@ -31,7 +32,7 @@ export class BlogApi {
         }
 
         return await this.client.getEntries(request).then(entries => {
-            let blogPosts = [];
+            let blogPosts: BlogPost[] = [];
             let totalPageNo = 1;
             if (entries && entries.items && entries.items.length > 0) {
                 blogPosts = entries.items.map(entry => this.convertPost(entry));
@@ -46,7 +47,7 @@ export class BlogApi {
         });
     }
 
-    async fetchBlogById(id): Promise<BlogPost> {
+    async fetchBlogById(id: string): Promise<BlogPost | null> {
         return await this.client.getEntry(id).then(entry => {
             if (entry) {
                 const post = this.convertPost(entry);
@@ -63,15 +64,12 @@ export class BlogApi {
                 'fields.slug[in]': slug
             })
             .then(entries => {
-                if (entries && entries.items && entries.items.length > 0) {
-                    const post = this.convertPost(entries.items[0]);
-                    return post;
-                }
-                return null;
+                const post = this.convertPost(entries.items[0]);
+                return post;
             });
     }
 
-    convertImage = (rawImage): HeroImage => {
+    convertImage = (rawImage): HeroImage | undefined => {
         if (rawImage) {
             return {
                 imageUrl: rawImage.file.url.replace('//', 'http://'), // may need to put null check as well here
@@ -79,10 +77,10 @@ export class BlogApi {
                 title: rawImage.title
             };
         }
-        return null;
+        return undefined;
     };
 
-    convertAuthor = (rawAuthor): Author => {
+    convertAuthor = (rawAuthor): Author | undefined => {
         if (rawAuthor) {
             return {
                 name: rawAuthor.name,
@@ -96,7 +94,7 @@ export class BlogApi {
                 github: rawAuthor.github
             };
         }
-        return null;
+        return undefined;
     };
 
     convertPost = (rawData): BlogPost => {

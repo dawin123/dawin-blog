@@ -7,7 +7,7 @@ import { Layout } from '../../components/layout/layout';
 // import { NextSeo } from "next-seo";
 
 type BlogDetailPageProps = {
-    post: BlogPost;
+    post?: BlogPost;
 };
 
 const BlogDetailPage: NextPage<BlogDetailPageProps> = ({ post }) => {
@@ -22,7 +22,10 @@ const BlogDetailPage: NextPage<BlogDetailPageProps> = ({ post }) => {
 BlogDetailPage.getInitialProps = async ctx => {
     const { slug } = ctx.query;
     const api = new BlogApi();
-    const post = await api.fetchBlogBySlug(slug as string);
+    const post = await api.fetchBlogBySlug(slug as string).catch(error => {
+        console.error(error);
+        return undefined;
+    });
     return { post };
 };
 

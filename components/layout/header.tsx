@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
@@ -10,14 +12,18 @@ export const Header = () => {
             <Navbar.Toggle aria-controls='basic-navbar-nav' />
             <Navbar.Collapse id='basic-navbar-nav'>
                 <Nav className='mr-auto'>
-                    <Link href='/' as={`/`} passHref>
-                        <Nav.Link href='/'>Home</Nav.Link>
+                    <Link href='/' as={`/`} className='navbar-link'>
+                        Home
                     </Link>
-                    <Link href='/blog' as={'/blog'} passHref>
-                        <Nav.Link href='/blog'>Blog</Nav.Link>
+                    <Link href='/blog' as={'/blog'} className='navbar-link'>
+                        Blog
                     </Link>
-                    <Link href='/project-svarga' as={'/project-svarga'} passHref>
-                        <Nav.Link href='/project-svarga'>Project Svarga</Nav.Link>
+                    <Link
+                        href='/project-svarga'
+                        as={'/project-svarga'}
+                        className='navbar-link'
+                    >
+                        Project Svarga
                     </Link>
                 </Nav>
             </Navbar.Collapse>

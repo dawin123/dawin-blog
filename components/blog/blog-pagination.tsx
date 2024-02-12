@@ -10,7 +10,7 @@ export const BlogPagination: React.FC = () => {
     const dispatch = useDispatch();
     const start = Math.floor(currentPage / 5) * PAGE_PER_FOLD + 1;
     const end = Math.min(start + PAGE_PER_FOLD, totalPage + 1);
-    const pages = [];
+    const pages: number[] = [];
     for (let i = start; i < end; i++) {
         pages.push(i);
     }

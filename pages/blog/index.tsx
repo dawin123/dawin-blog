@@ -4,7 +4,7 @@ import type { NextPage } from 'next';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { BlogPost } from '../../services/blog.types';
+import type { BlogPost } from '../../services/blog.types';
 import BlogCard from '../../components/blog/blog-card';
 import { Layout } from '../../components/layout/layout';
 import { BlogPagination } from '../../components/blog/blog-pagination';
@@ -13,8 +13,11 @@ import { getBlogListState } from '../../redux/blog-list/reducer';
 import { fetchBlogList, fetchBlogTags } from '../../redux/blog-list/actions';
 import { wrapper } from '../../redux/store';
 
-const chunk = (arr: Array<any>, chunkSize: number) => {
-    const R = [];
+const chunk = (
+    arr: Array<BlogPost>,
+    chunkSize: number
+): Array<Array<BlogPost>> => {
+    const R: Array<Array<BlogPost>> = [];
     for (let i = 0; i < arr.length; i += chunkSize)
         R.push(arr.slice(i, i + chunkSize));
     return R;
@@ -34,7 +37,7 @@ const BlogPage: NextPage = () => {
                             entry.heroImage ? entry.heroImage.imageUrl : ''
                         }
                         title={entry.title}
-                        author={entry.author.name}
+                        author={entry.author?.name ?? ''}
                         description={entry.description}
                         tags={entry.tags}
                         publishedDate={entry.publishedDate}

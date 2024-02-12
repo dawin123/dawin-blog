@@ -40,6 +40,17 @@ body {
     text-align: justify;
 }
 
+/* Navbar */
+.navbar {
+    padding: 0.5rem 1rem;
+}
+
+.navbar-link {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    color: rgba(0, 0, 0, 0.5);
+}
+
 /* Blog List */
 .pagination-container {
     display: flex;
@@ -66,7 +77,7 @@ body {
     }
 
     .pill {
-        background-color: white;
+        background-color: white !important;
         color: #007bff;
         border: 1px solid #007bff;
     }
