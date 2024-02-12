@@ -1,5 +1,4 @@
 import React from 'react';
-import type { NextPage } from 'next';
 import Image from 'react-bootstrap/Image';
 import Container from 'react-bootstrap/Container';
 
@@ -17,7 +16,7 @@ const pages = [
     'project-svarga/Comic_P_001_013-min.webp'
 ];
 
-const SvargaPage: NextPage = () => {
+const SvargaPage = () => {
     return (
         <Container className='text-center'>
             <Image

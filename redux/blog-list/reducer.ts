@@ -26,7 +26,7 @@ export interface BlogListState {
     entries: Array<BlogPost>;
     currentPage: number;
     totalPage: number;
-    selectedTags: [];
+    selectedTags: string[];
     tagList: Tags;
 }
 
