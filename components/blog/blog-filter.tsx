@@ -1,5 +1,4 @@
 import React from 'react';
-import { BLOG_TAGS } from '../../constants';
 import Button from 'react-bootstrap/Button';
 import { useSelector, useDispatch } from 'react-redux';
 import {
