@@ -1,16 +1,16 @@
 'use client';
 
-import React from 'react';
+import React, { type FC } from 'react';
 import Button from 'react-bootstrap/Button';
-import type { Tags } from '../../services/tags.types';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
+import type { Tags } from '../../services/tags.types';
 
 interface Props {
     selectedTags: string[];
     tagList: Tags;
 }
 
-export const BlogFilter: React.FC<Props> = ({ selectedTags, tagList }) => {
+export const BlogFilter: FC<Props> = ({ selectedTags, tagList }) => {
     const searchParams = useSearchParams();
     const pathname = usePathname();
     const { push, refresh } = useRouter();

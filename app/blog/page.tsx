@@ -3,7 +3,7 @@ import { BlogApi } from '../../services/blog';
 import { TagsApi } from '../../services/tags';
 import { BlogPost } from '../../services/blog.types';
 import { Col, Container, Row } from 'react-bootstrap';
-import BlogCard from '../../components/blog/blog-card';
+import { BlogCard } from '../../components/blog/blog-card';
 import { BlogPagination } from '../../components/blog/blog-pagination';
 import { BlogFilter } from '../../components/blog/blog-filter';
 

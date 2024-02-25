@@ -1,10 +1,10 @@
 'use client';
 
-import React from 'react';
+import React, { type FC } from 'react';
 import Card from 'react-bootstrap/Card';
 import Badge from 'react-bootstrap/Badge';
 import Link from 'next/link';
-import { Tags } from '../../services/tags.types';
+import type { Tags } from '../../services/tags.types';
 
 interface Props {
     id: string;
@@ -18,7 +18,7 @@ interface Props {
     tagList: Tags;
 }
 
-const BlogCard: React.FC<Props> = ({
+export const BlogCard: FC<Props> = ({
     id,
     description,
     publishedDate,
@@ -51,5 +51,3 @@ const BlogCard: React.FC<Props> = ({
         </Link>
     );
 };
-
-export default BlogCard;

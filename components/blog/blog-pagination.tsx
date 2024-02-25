@@ -1,16 +1,16 @@
 'use client';
 
-import React from 'react';
+import React, { type FC } from 'react';
 import Pagination from 'react-bootstrap/Pagination';
-import { PAGE_PER_FOLD } from '../../constants';
 import { useSearchParams, usePathname, useRouter } from 'next/navigation';
+import { PAGE_PER_FOLD } from '../../constants';
 
 interface Props {
     currentPage: number;
     totalPage: number;
 }
 
-export const BlogPagination: React.FC<Props> = ({ currentPage, totalPage }) => {
+export const BlogPagination: FC<Props> = ({ currentPage, totalPage }) => {
     const searchParams = useSearchParams();
     const pathname = usePathname();
     const { push, refresh } = useRouter();
