@@ -1,17 +1,11 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import type { NextPage } from 'next';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import type { BlogPost } from '../../services/blog.types';
+import { BlogApi } from '../../services/blog';
+import { TagsApi } from '../../services/tags';
+import { BlogPost } from '../../services/blog.types';
+import { Col, Container, Row } from 'react-bootstrap';
 import BlogCard from '../../components/blog/blog-card';
-import { Layout } from '../../components/layout/layout';
 import { BlogPagination } from '../../components/blog/blog-pagination';
 import { BlogFilter } from '../../components/blog/blog-filter';
-import { getBlogListState } from '../../redux/blog-list/reducer';
-import { fetchBlogList, fetchBlogTags } from '../../redux/blog-list/actions';
-import { wrapper } from '../../redux/store';
 
 const chunk = (
     arr: Array<BlogPost>,
@@ -23,8 +17,27 @@ const chunk = (
     return R;
 };
 
-const BlogPage: NextPage = () => {
-    const { entries } = useSelector(getBlogListState);
+const BlogPage = async ({
+    searchParams
+}: {
+    searchParams?: {
+        selectedTags?: string;
+        page?: string;
+    };
+}) => {
+    const selectedTags = searchParams?.selectedTags
+        ? searchParams.selectedTags.split(',')
+        : [];
+    const currentPage = Number(searchParams?.page) || 1;
+
+    const blogAPI = new BlogApi();
+    const tagAPI = new TagsApi();
+    const { entries, totalPageNo } = await blogAPI.fetchBlogEntries(
+        selectedTags,
+        currentPage
+    );
+    const tags = await tagAPI.fetchTags();
+
     const renderBlogList = (entries: Array<BlogPost>) =>
         entries.map((entry, i) => {
             return (
@@ -41,6 +54,7 @@ const BlogPage: NextPage = () => {
                         description={entry.description}
                         tags={entry.tags}
                         publishedDate={entry.publishedDate}
+                        tagList={tags}
                     />
                 </Col>
             );
@@ -49,27 +63,20 @@ const BlogPage: NextPage = () => {
     const rows = chunk(entries, 3);
 
     return (
-        <Layout>
-            <Container>
-                <h1 className='text-center'>Blog</h1>
-                <BlogFilter />
-                {rows.length > 0 &&
-                    rows.map((row, id) => {
-                        return (
-                            <Row key={id} md={3} xs={1}>
-                                {row.length > 0 && renderBlogList(row)}
-                            </Row>
-                        );
-                    })}
-                <BlogPagination />
-            </Container>
-        </Layout>
+        <Container>
+            <h1 className='text-center'>Blog</h1>
+            <BlogFilter selectedTags={selectedTags} tagList={tags} />
+            {rows.length > 0 &&
+                rows.map((row, id) => {
+                    return (
+                        <Row key={id} md={3} xs={1}>
+                            {row.length > 0 && renderBlogList(row)}
+                        </Row>
+                    );
+                })}
+            <BlogPagination currentPage={currentPage} totalPage={totalPageNo} />
+        </Container>
     );
 };
-
-export const getStaticProps = wrapper.getStaticProps(async ({ store }) => {
-    await store.dispatch(fetchBlogList());
-    await store.dispatch(fetchBlogTags());
-});
 
 export default BlogPage;

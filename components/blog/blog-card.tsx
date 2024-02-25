@@ -1,9 +1,10 @@
+'use client';
+
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Badge from 'react-bootstrap/Badge';
 import Link from 'next/link';
-import { getBlogListState } from '../../redux/blog-list/reducer';
-import { useSelector } from 'react-redux';
+import { Tags } from '../../services/tags.types';
 
 interface Props {
     id: string;
@@ -14,6 +15,7 @@ interface Props {
     title: string;
     imageUrl?: string;
     author: string;
+    tagList: Tags;
 }
 
 const BlogCard: React.FC<Props> = ({
@@ -24,10 +26,9 @@ const BlogCard: React.FC<Props> = ({
     tags,
     title,
     imageUrl,
-    author
+    author,
+    tagList
 }) => {
-    const { tagList } = useSelector(getBlogListState);
-
     return (
         <Link href='/blog/[slug]' as={`/blog/${slug}`}>
             <Card data-testid={`blog-card-${id}`} className='blog-card'>

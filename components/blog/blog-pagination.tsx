@@ -1,13 +1,20 @@
+'use client';
+
 import React from 'react';
 import Pagination from 'react-bootstrap/Pagination';
 import { PAGE_PER_FOLD } from '../../constants';
-import { useSelector, useDispatch } from 'react-redux';
-import { getBlogListState } from '../../redux/blog-list/reducer';
-import { setCurrentPage, fetchBlogList } from '../../redux/blog-list/actions';
+import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 
-export const BlogPagination: React.FC = () => {
-    const { currentPage, totalPage } = useSelector(getBlogListState);
-    const dispatch = useDispatch();
+interface Props {
+    currentPage: number;
+    totalPage: number;
+}
+
+export const BlogPagination: React.FC<Props> = ({ currentPage, totalPage }) => {
+    const searchParams = useSearchParams();
+    const pathname = usePathname();
+    const { push, refresh } = useRouter();
+
     const start = Math.floor(currentPage / 5) * PAGE_PER_FOLD + 1;
     const end = Math.min(start + PAGE_PER_FOLD, totalPage + 1);
     const pages: number[] = [];
@@ -17,8 +24,15 @@ export const BlogPagination: React.FC = () => {
 
     const goToPage = (page: number) => () => {
         if (page !== currentPage) {
-            dispatch(setCurrentPage(page));
-            dispatch(fetchBlogList());
+            const params = new URLSearchParams(searchParams ?? '');
+            if (page === 1) {
+                params.delete('page');
+            } else {
+                params.set('page', page.toString());
+            }
+
+            push(`${pathname}?${params.toString()}`);
+            refresh();
         }
     };
 
