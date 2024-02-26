@@ -28,7 +28,7 @@ export const BlogFilter: FC<Props> = ({ selectedTags, tagList }) => {
         let newSelectedTagList = selectedTags;
 
         if (tagIndex > -1) {
-            newSelectedTagList.filter((_, i) => i !== tagIndex);
+            newSelectedTagList = newSelectedTagList.filter((_, i) => i !== tagIndex);
         } else {
             newSelectedTagList.push(tag);
         }
