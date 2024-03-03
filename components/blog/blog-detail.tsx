@@ -1,18 +1,16 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { BlogPost } from '../../services/blog.types';
+import React, { type FC } from 'react';
 import Image from 'react-bootstrap/Image';
 import Container from 'react-bootstrap/Container';
-import { getBlogListState } from '../../redux/blog-list/reducer';
 import Markdown from 'react-markdown';
+import type { BlogPost } from '../../services/blog.types';
+import type { Tags } from '../../services/tags.types';
 
-type BlogDetailProps = {
+interface Props {
     post: BlogPost;
+    tagList: Tags;
 };
 
-export const BlogDetail = (props: BlogDetailProps) => {
-    const { post } = props;
-    const { tagList } = useSelector(getBlogListState);
+export const BlogDetail: FC<Props> = ({ post, tagList}) => {
     const mainTag = post.tags.length > 0 ? tagList[post.tags[0]] : '';
 
     return (

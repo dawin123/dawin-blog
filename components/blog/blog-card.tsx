@@ -1,9 +1,10 @@
-import React from 'react';
+'use client';
+
+import React, { type FC } from 'react';
 import Card from 'react-bootstrap/Card';
 import Badge from 'react-bootstrap/Badge';
 import Link from 'next/link';
-import { getBlogListState } from '../../redux/blog-list/reducer';
-import { useSelector } from 'react-redux';
+import type { Tags } from '../../services/tags.types';
 
 interface Props {
     id: string;
@@ -14,9 +15,10 @@ interface Props {
     title: string;
     imageUrl?: string;
     author: string;
+    tagList: Tags;
 }
 
-const BlogCard: React.FC<Props> = ({
+export const BlogCard: FC<Props> = ({
     id,
     description,
     publishedDate,
@@ -24,10 +26,9 @@ const BlogCard: React.FC<Props> = ({
     tags,
     title,
     imageUrl,
-    author
+    author,
+    tagList
 }) => {
-    const { tagList } = useSelector(getBlogListState);
-
     return (
         <Link href='/blog/[slug]' as={`/blog/${slug}`}>
             <Card data-testid={`blog-card-${id}`} className='blog-card'>
@@ -50,5 +51,3 @@ const BlogCard: React.FC<Props> = ({
         </Link>
     );
 };
-
-export default BlogCard;

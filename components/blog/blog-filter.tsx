@@ -1,18 +1,19 @@
-import React from 'react';
-import Button from 'react-bootstrap/Button';
-import { useSelector, useDispatch } from 'react-redux';
-import {
-    addSelectedTag,
-    removeSelectedTag,
-    clearSelectedTag,
-    fetchBlogList,
-    setCurrentPage
-} from '../../redux/blog-list/actions';
-import { getBlogListState } from '../../redux/blog-list/reducer';
+'use client';
 
-export const BlogFilter: React.FC = () => {
-    const dispatch = useDispatch();
-    const { selectedTags, tagList } = useSelector(getBlogListState);
+import React, { type FC } from 'react';
+import Button from 'react-bootstrap/Button';
+import { useSearchParams, usePathname, useRouter } from 'next/navigation';
+import type { Tags } from '../../services/tags.types';
+
+interface Props {
+    selectedTags: string[];
+    tagList: Tags;
+}
+
+export const BlogFilter: FC<Props> = ({ selectedTags, tagList }) => {
+    const searchParams = useSearchParams();
+    const pathname = usePathname();
+    const { push, refresh } = useRouter();
 
     const isTagSelected = (tag: string) => {
         const tagIndex = selectedTags.indexOf(tag);
@@ -24,19 +25,29 @@ export const BlogFilter: React.FC = () => {
 
     const handleFilterToggle = (tag: string) => () => {
         const tagIndex = selectedTags.indexOf(tag);
+        let newSelectedTagList = selectedTags;
+
         if (tagIndex > -1) {
-            dispatch(removeSelectedTag(tagIndex));
+            newSelectedTagList = newSelectedTagList.filter((_, i) => i !== tagIndex);
         } else {
-            dispatch(addSelectedTag(tag));
+            newSelectedTagList.push(tag);
         }
-        dispatch(setCurrentPage(1));
-        dispatch(fetchBlogList());
+
+        const params = new URLSearchParams(searchParams ?? '');
+        if (newSelectedTagList.length) {
+            params.set('selectedTags', newSelectedTagList.join(','));
+        } else {
+            params.delete('selectedTags');
+        }
+        push(`${pathname}?${params.toString()}`);
+        refresh();
     };
 
     const handleClearFilter = () => {
-        dispatch(clearSelectedTag());
-        dispatch(setCurrentPage(1));
-        dispatch(fetchBlogList());
+        const params = new URLSearchParams(searchParams ?? '');
+        params.delete('selectedTags');
+        push(`${pathname}?${params.toString()}`);
+        refresh();
     };
 
     return (
