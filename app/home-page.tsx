@@ -79,9 +79,10 @@ const HomePage = ({ jobExperiences, educations }: HomePageProps) => {
         <div>
             <main>
                 <Image
-                    src='https://lh3.googleusercontent.com/yBZERrimxhPreSizMEX_Ma-aS1xVlNf250NvBRFD95PlVh7wY_jAmaz2sn8IX_gINtsZ2ZJrjUPThtEUhUcBXH9g7kojdnNOd8-VrdJe8xTN2ia-my-GplF1Wpk1WmwVa3FEqH7u-9DDxwCbU989SfaMoE9KSEE_V2QR8N0EDG8UVpG_RJRKu5wCRHe0lU6g-SKBR1qLgecwoTFBvZPZahXA3wGOMux_ECXNQsqHV_xdaAuhB-sUlS_4cB-PakJ_WhkJO83SN1JRfIFA6iDR7vhFb-zVGMijkcjOl6zjE5LTU-UqBz2ibP432X8gZFgaJLuz4Hm-P00yeaWAYdX3W_rZMK5XUHMVBeHzYKhnOA7vdQnQOSdVFJwQon7HBncxZg_slqd9EavKz5hPfr_pEOJQLT2iTI_JYftrxGEqvEJozIPpvYtnsNSg4fCP30Uv_uetIs_mgPAidvDZgeSRsfXe8PKYHWkkSfedaS0DQTrm08rQx3hIPUoTPlaBgZ4IHGTGf-vxxd_lFMN-uDNl2c0qHs_aAtmDJYuG5Q9lJLuhMRpdxFkqW6Vlb8sor8w2IjCPFrL45XneZbLPP-31kV9dHXyBhoKiiJZXaZ-zZRSGcsL4r8lWMzahAyfOphR2fZbsHRwztrWI6Li-HrOoDo5Oq1Cko_2EiZSg5G59hB2CMfHeBtLJG1r-wkPm1A=s200-no?authuser=1'
+                    src='/profile.jpeg'
                     roundedCircle
                     alt='dawin photo'
+                    style={{ width: '150px' }}
                 />
                 <h1 className='title'>
                     Welcome to{' '}
