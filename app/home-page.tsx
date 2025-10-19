@@ -35,14 +35,14 @@ const HomePage = ({ jobExperiences, educations }: HomePageProps) => {
     const renderJobExperience = (jobExperience: JobExperience) => {
         return (
             <Row key={jobExperience.id} className='mb-5'>
-                <Col xs={1}>
+                <Col xs={2}>
                     <Image
                         style={{ width: '50px' }}
                         src={jobExperience.icon && jobExperience.icon.imageUrl}
                         alt={jobExperience.icon && jobExperience.icon.title}
                     />
                 </Col>
-                <Col xs={11} className='personal-detail-col'>
+                <Col xs={10} className='personal-detail-col'>
                     <h4>{jobExperience.company}</h4>
                     <h6>{`${jobExperience.jobTitle} . ${jobExperience.employmentType}`}</h6>
                     <p>{`${jobExperience.startDate} - ${jobExperience.endDate}`}</p>
@@ -84,7 +84,7 @@ const HomePage = ({ jobExperiences, educations }: HomePageProps) => {
                     alt='dawin photo'
                     style={{ width: '150px' }}
                 />
-                <h1 className='title'>
+                <h1 className='title text-center mb-4'>
                     Welcome to{' '}
                     <span style={{ color: '#0070f3' }}>Dawin&apos;s Space</span>
                 </h1>

@@ -13,7 +13,14 @@ const pages = [
     'project-svarga/Comic_P_001_010-min.webp',
     'project-svarga/Comic_P_001_011-min.webp',
     'project-svarga/Comic_P_001_012-min.webp',
-    'project-svarga/Comic_P_001_013-min.webp'
+    'project-svarga/Comic_P_001_013-min.webp',
+    'project-svarga/Comic_P_001_014.webp',
+    'project-svarga/Comic_P_001_015.webp',
+    'project-svarga/Comic_P_001_016.webp',
+    'project-svarga/Comic_P_001_017.webp',
+    'project-svarga/Comic_P_001_018.webp',
+    'project-svarga/Comic_P_001_019.webp',
+    'project-svarga/Comic_P_001_020.webp',
 ];
 
 const SvargaPage = () => {
