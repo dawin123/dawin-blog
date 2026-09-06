@@ -40,3 +40,17 @@ curl -o- -L https://yarnpkg.com/install.sh | bash
 ```sh
  CONTENTFUL_SPACE_ID=<space_id> CONTENTFUL_ACCESS_TOKEN=<access_token> yarn dev
 ```
+
+## Contentful cache revalidation
+
+Published Contentful changes refresh the site without a Vercel deployment. Configure
+a Contentful webhook for the production environment with this URL:
+
+```
+https://<production-domain>/api/revalidate
+```
+
+Enable request verification in **Contentful → Settings → Webhooks → Settings** and
+store the generated signing secret as `CONTENTFUL_WEBHOOK_SIGNING_SECRET` in Vercel's
+Production environment variables. Enable the webhook for Entry and Asset `publish`,
+`unpublish`, and `delete` events only. Do not enable save or auto-save events.
